@@ -183,7 +183,3 @@ export const intentPatterns: IntentPatterns = {
 };
 
 
-// Usage example:
-const classifier = new MultiIntentClassifier(intentPatterns);
-const result = classifier.classify("Can you help me find the latest stock prices?");
-console.log(result);

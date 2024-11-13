@@ -1,6 +1,4 @@
-// tests/MultiIntentClassifier.test.ts
-
-import MultiIntentClassifier, { intentPatterns } from '../Classifier';
+import MultiIntentClassifier, { intentPatterns } from "../classifier";
 
 describe('MultiIntentClassifier', () => {
   const classifier = new MultiIntentClassifier(intentPatterns);
@@ -15,7 +13,20 @@ describe('MultiIntentClassifier', () => {
     expect(result.intents).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ intent: 'Financial Markets' }),
+        expect.objectContaining({ intent: 'News/Current Events' }),
       ])
     );
   });
+
+  it('should handle queries with no intent matched', async () => {
+    const result = await classifier.classify('Hello, how are you?');
+    expect(result.intents).toEqual([]);
+  });
+
+  it('should handle invalid input gracefully', async () => {
+    const result = await classifier.classify('');
+    expect(result.intents).toEqual([]);
+  });
+
+ 
 });
