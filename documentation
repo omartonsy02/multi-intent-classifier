@@ -1,0 +1,8 @@
+Approach Taken
+The Multi-Intent Classifier employs a hybrid approach that combines Naive Bayes classification and regular expression (regex) pattern matching to classify user queries into one or more intents. The Naive Bayes classifier is utilized for probabilistic intent prediction, while regex patterns are leveraged for rule-based intent matching. This combination allows the system to handle both structured and unstructured queries. However, the current approach may experience response times exceeding one second, especially with more complex or longer queries.
+
+Performance Characteristics
+The classifier's performance can be enhanced through iterative feedback mechanisms. As the system processes more queries and receives feedback (such as whether the classification results are accurate), it can improve by incorporating this new data. By continuously refining the intent patterns and updating the training data, the classifier’s accuracy and performance will progressively improve. The model's ability to adjust and learn from new input ensures that the system remains effective and up-to-date with evolving user interactions.
+
+How to Extend the System
+To extend the system, new intents can be incorporated using unsupervised learning techniques. This would allow the model to identify new patterns in the data without relying on manually labeled examples. Clustering algorithms or self-organizing maps can be applied to group similar queries, thus enabling the system to autonomously discover and classify additional intents. This approach would enhance the flexibility and scalability of the classifier, making it capable of adapting to emerging user needs and diverse query types.
