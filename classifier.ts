@@ -1,8 +1,7 @@
-// Import the necessary libraries
-
+import { WordTokenizer } from 'natural';
 const natural = require('natural');
 const PorterStemmer = natural.PorterStemmer;
-import { WordTokenizer } from 'natural';
+
 // Synonym dictionary for basic expansion
 const synonyms: Record<string, string[]> = {
     "shop": ["buy", "acquire", "purchase"],
@@ -26,7 +25,6 @@ export default class MultiIntentClassifier {
     constructor(patterns: IntentPatterns) {
         this.patterns = patterns;
     }
-    
 
     classify(input: string): ClassificationResult {
         const startTime = performance.now();
@@ -68,14 +66,20 @@ export default class MultiIntentClassifier {
             if (confidence > 0) {
                 matchedIntents.push({ intent, confidence });
             }
-              // Normalize the confidence scores
-            const totalConfidence = matchedIntents.reduce((sum, item) => sum + item.confidence, 0);
-            if (totalConfidence > 0) {
-             matchedIntents.forEach(item => {
+        }
+
+
+        // Normalize the confidence scores
+        const totalConfidence = matchedIntents.reduce((sum, item) => sum + item.confidence, 0);
+        if (totalConfidence > 0) {
+            matchedIntents.forEach(item => {
                 item.confidence = (item.confidence / totalConfidence) * 100;
-                });
-             }
-            }
+            });
+        }
+        // If no intent matches, classify it as "Chat/Conversational" with 10% confidence
+        if (matchedIntents.length === 0) {
+            matchedIntents.push({ intent: "Chat/Conversational", confidence: 10 });
+        }
 
         // Sort by confidence
         matchedIntents.sort((a, b) => b.confidence - a.confidence);
@@ -101,6 +105,7 @@ export default class MultiIntentClassifier {
         // Step 4: Join stemmed tokens back into a processed string
         return stemmedTokens.join(" ");
     }
+
     private expandSynonyms(word: string): string {
         for (const [key, syns] of Object.entries(synonyms)) {
             if (syns.includes(word)) {
@@ -110,7 +115,6 @@ export default class MultiIntentClassifier {
         return word; // Return original word if no synonym match is found
     }
 }
-
 export const intentPatterns: IntentPatterns = {
   "Chat/Conversational": [
       { pattern: /\b(help|support|can|please|would)\b/i, weight: 0.8 },
