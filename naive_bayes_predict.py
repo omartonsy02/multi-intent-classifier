@@ -13,7 +13,7 @@ class NaiveBayesClassifier:
         # Vectorize the query and predict the intent and confidence
         query_vec = self.vectorizer.transform([query])
         predicted_intent = self.nb_classifier.predict(query_vec)[0]
-        predicted_confidence = self.nb_classifier.predict_proba(query_vec).max() * 100
+        predicted_confidence = self.nb_classifier.predict_proba(query_vec).max()
 
         return {
             'intent': predicted_intent,

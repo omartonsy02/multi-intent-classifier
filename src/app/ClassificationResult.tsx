@@ -16,7 +16,7 @@ const ClassificationResultComponent: React.FC<ClassificationResultProps> = ({ cl
     <div className="classification-result">
       <div className="intent-item">
         <p><strong>Intent:</strong> {highestConfidenceIntent.intent}</p>
-        <p><strong>Confidence:</strong> {Math.round(highestConfidenceIntent.confidence * 100)}%</p>
+        <p><strong>Confidence:</strong> {Math.round(highestConfidenceIntent.confidence)}%</p>
       </div>
       <div className="processing-time">
         <p><strong>Processing Time:</strong> {classification.processingTime} ms</p>
