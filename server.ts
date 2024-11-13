@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import MultiIntentClassifier, { intentPatterns } from './classifier.ts';
+import MultiIntentClassifier, { intentPatterns } from './classifier';
 //import { NaiveBayesClassifier } from './naiveBayesClassifier.ts';
 
 const app = express();
