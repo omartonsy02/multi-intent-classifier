@@ -56,12 +56,12 @@ var MultiIntentClassifier = /** @class */ (function () {
         var totalConfidence = matchedIntents.reduce(function (sum, item) { return sum + item.confidence; }, 0);
         if (totalConfidence > 0) {
             matchedIntents.forEach(function (item) {
-                item.confidence = (item.confidence / totalConfidence) * 100;
+                item.confidence = (item.confidence / totalConfidence)
             });
         }
         // If no intent matches, classify it as "Chat/Conversational" with 10% confidence
         if (matchedIntents.length === 0) {
-            matchedIntents.push({ intent: "Chat/Conversational", confidence: 10 });
+            matchedIntents.push({ intent: "Chat/Conversational", confidence: 0.1 });
         }
         // Sort by confidence
         matchedIntents.sort(function (a, b) { return b.confidence - a.confidence; });
