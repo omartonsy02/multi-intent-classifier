@@ -1,4 +1,3 @@
-// src/app/page.tsx
 
 "use client"; // Ensures client-side rendering for React hooks
 

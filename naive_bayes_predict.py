@@ -20,7 +20,6 @@ class NaiveBayesClassifier:
             'confidence': round(predicted_confidence, 2)
         }
 
-# Example usage
 if __name__ == "__main__":
  
     # Initialize the classifier and classify the query

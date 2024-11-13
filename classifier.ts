@@ -59,9 +59,6 @@ export default class MultiIntentClassifier {
             // Ensure confidence is not less than 0 or more than 1
             confidence = Math.min(1, Math.max(0, confidence));
 
-            // Convert to percentage
-            confidence *= 100;
-
             // Only include intents with non-zero confidence
             if (confidence > 0) {
                 matchedIntents.push({ intent, confidence });
@@ -73,12 +70,12 @@ export default class MultiIntentClassifier {
         const totalConfidence = matchedIntents.reduce((sum, item) => sum + item.confidence, 0);
         if (totalConfidence > 0) {
             matchedIntents.forEach(item => {
-                item.confidence = (item.confidence / totalConfidence) * 100;
+                item.confidence = (item.confidence / totalConfidence);
             });
         }
         // If no intent matches, classify it as "Chat/Conversational" with 10% confidence
         if (matchedIntents.length === 0) {
-            matchedIntents.push({ intent: "Chat/Conversational", confidence: 10 });
+            matchedIntents.push({ intent: "Chat/Conversational", confidence: 0.1 });
         }
 
         // Sort by confidence
@@ -109,7 +106,7 @@ export default class MultiIntentClassifier {
     private expandSynonyms(word: string): string {
         for (const [key, syns] of Object.entries(synonyms)) {
             if (syns.includes(word)) {
-                return key; // Replace synonym with its base form
+                return key; 
             }
         }
         return word; // Return original word if no synonym match is found
